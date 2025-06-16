@@ -58,7 +58,11 @@ RUN patch -p0 < diag_suppress.patch
 
 # Build LAMMPS with Kokkos support
 RUN mkdir build-grace && cd build-grace && \
-    cmake ../cmake \
+    cmake \
+    -C packages.cmake \
+    -C kokkos-skx-pascal61.cmake \
+    # -C kokkos-grace-hopper.cmake \
+    ../cmake \
     -D CMAKE_INSTALL_PREFIX=/opt/lammps \
     -D CMAKE_PREFIX_PATH="${MPI_HOME};/usr/local/lib/python3.12/dist-packages/torch/share/cmake" \
     -D CMAKE_CXX_STANDARD=17 \
@@ -72,14 +76,6 @@ RUN mkdir build-grace && cd build-grace && \
     -D BUILD_MPI=ON \
     -D BUILD_OMP=ON \
     -D BUILD_SHARED_LIBS=ON \
-    -D PKG_KOKKOS=ON \
-    -D Kokkos_ENABLE_SERIAL=ON \
-    -D Kokkos_ENABLE_CUDA=ON \
-    -D Kokkos_ENABLE_OPENMP=ON \
-    -D Kokkos_ARCH_SKX=ON \
-    -D Kokkos_ARCH_PASCAL61=ON \
-    -D FFT_KOKKOS=CUFFT \
-    -D Kokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
     -D PKG_ML-MACE=ON \
     -D PKG_MANYBODY=ON \
     -D PKG_BODY=ON \
