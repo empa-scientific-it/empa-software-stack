@@ -56,12 +56,14 @@ ENV LD_LIBRARY_PATH=${CUDA_LIB_PATH}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 COPY diag_suppress.patch .
 RUN patch -p0 < diag_suppress.patch
 
+# Copy Kokkos arch presets
+ARG KOKKOS_PRESET=skx-pascal61 # or 'grace-hopper' on Alps
+COPY --chown=root:root kokkos-${KOKKOS_PRESET}.cmake .
+
 # Build LAMMPS with Kokkos support
 RUN mkdir build-grace && cd build-grace && \
     cmake \
-    -C packages.cmake \
-    -C kokkos-skx-pascal61.cmake \
-    # -C kokkos-grace-hopper.cmake \
+    -C ../kokkos-${KOKKOS_PRESET}.cmake \
     ../cmake \
     -D CMAKE_INSTALL_PREFIX=/opt/lammps \
     -D CMAKE_PREFIX_PATH="${MPI_HOME};/usr/local/lib/python3.12/dist-packages/torch/share/cmake" \
