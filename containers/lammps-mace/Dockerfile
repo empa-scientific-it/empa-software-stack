@@ -92,9 +92,7 @@ RUN mkdir build-grace && cd build-grace && \
     -D PKG_KSPACE=ON \
     -D PKG_RIGID=ON \
     -D PKG_EXTRA-FIX=ON \
-    -D GSL_INCLUDE_DIR=/usr/include \
-    -D GSL_LIBRARY=/usr/lib/x86_64-linux-gnu/libgsl.so && \
-    make -j"$(nproc)" && \
+    && make -j"$(nproc)" && \
     make install && \
     cd ..
 
