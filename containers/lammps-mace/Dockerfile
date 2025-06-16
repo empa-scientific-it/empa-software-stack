@@ -119,7 +119,7 @@ COPY --from=builder /opt/lammps /opt/lammps
 
 # Set runtime environment
 ENV PATH="/opt/hpcx/ompi/bin:/opt/lammps/bin:${PATH}"
-ENV LD_LIBRARY_PATH="/opt/hpcx/ompi/lib:${LD_LIBRARY_PATH}"
+ENV LD_LIBRARY_PATH="/opt/lammps/lib:/opt/hpcx/ompi/lib:${LD_LIBRARY_PATH}"
 
 # Default to interactive shell
 CMD ["bash"]
