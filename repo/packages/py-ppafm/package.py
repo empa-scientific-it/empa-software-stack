@@ -33,6 +33,7 @@ class PyPpafm(PythonPackage):
     license("MIT License", checked_by="edoardob90")
 
     version("0.3.2", sha256="ca6f2a885af6201bdf230ea39af6dce569ca506499c6775ed6cc0b736b839168")
+    version("0.4.0", sha256="f02a2c3f08f42bc8f243b9a730753a7f4c1ad93e00d63860f51820b39caf24be")
 
     # Build dependencies
     depends_on("py-setuptools@61.2:", type="build")

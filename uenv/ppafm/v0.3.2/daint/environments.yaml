@@ -15,6 +15,6 @@ gcc-env:
         - py-ppafm@0.3.2
     views:
         default:
-            link: roots
+            link: all
             uenv:
                 add_compilers: true

@@ -23,6 +23,9 @@ containers/
   ├── software_name/   # Root folder for an image containing the Dockerfile and all its dependencies
   ├── edf/             # Environment Definition File (EDF) required by the Container Engine
                        #   i.e., which image to load, paths to mount, options, etc.
+modules/
+  ├── software_name/   # Root folder containing Lmod module files (LUA modules)
+                       #   for custom software setup (e.g. paths, env variables, etc.)
 ```
 
 The `repo.yaml` defines the namespace as `empa`:
