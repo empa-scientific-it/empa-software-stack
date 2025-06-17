@@ -20,8 +20,7 @@ uenv/
       ├── vX.Y.Z/      # Version folder (semver schema, patch is optional)
           ├── arch/    # Architecture, 'eiger' (zen2) or 'daint' (gh200)
 containers/
-  ├── software_name/   # Root folder for an image containing the Dockerfile
-                       #   and all its dependencies
+  ├── software_name/   # Root folder for an image containing the Dockerfile and all its dependencies
   ├── edf/             # Environment Definition File (EDF) required by the Container Engine
                        #   i.e., which image to load, paths to mount, options, etc.
 modules/
