@@ -61,7 +61,7 @@ ARG KOKKOS_PRESET=skx-pascal61 # or 'grace-hopper' on Alps
 COPY --chown=root:root kokkos-${KOKKOS_PRESET}.cmake .
 
 # Build LAMMPS with Kokkos support
-RUN mkdir build-grace && cd build-grace && \
+RUN mkdir build && cd build && \
     cmake \
     -C ../kokkos-${KOKKOS_PRESET}.cmake \
     ../cmake \
