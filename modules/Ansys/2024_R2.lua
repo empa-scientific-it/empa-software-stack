@@ -18,9 +18,11 @@ local bin = pathJoin(root, "ansys/bin")
 conflict("Ansys")
 
 prepend_path("PATH", bin)
-prepend_path("PATH", pathJoin(root, "fluent/bin"))
 setenv("ANSYS_ROOT", root)
 setenv("ANSYS_BIN", bin)
 setenv("AWP_ROOT242", root)
 setenv("ANSYS_VERSION", "2024_R2_v242")
 setenv("ANSYSLMD_LICENSE_FILE", "1055@ansyslic.empa.ch")
+-- Fluent variables
+prepend_path("PATH", pathJoin(root, "fluent/bin"))
+setenv("FLUENT_INC", pathJoin(root, "fluent"))
