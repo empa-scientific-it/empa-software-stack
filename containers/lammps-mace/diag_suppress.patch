@@ -1,0 +1,15 @@
+--- cmake/CMakeLists.txt.orig	2025-06-16 11:02:36.977050977 +0200
++++ cmake/CMakeLists.txt	2025-06-16 14:31:23.434457782 +0200
+@@ -130,9 +130,9 @@
+ endif()
+ 
+ # silence nvcc warnings
+-if((PKG_KOKKOS) AND (Kokkos_ENABLE_CUDA) AND NOT (CMAKE_CXX_COMPILER_ID STREQUAL "Clang"))
+-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" "-Xcudafe --diag_suppress=unrecognized_pragma,--diag_suppress=128")
+-endif()
++#if((PKG_KOKKOS) AND (Kokkos_ENABLE_CUDA) AND NOT (CMAKE_CXX_COMPILER_ID STREQUAL "Clang"))
++#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" "-Xcudafe --diag_suppress=unrecognized_pragma,--diag_suppress=128")
++#endif()
+ 
+ # we *require* C++11 without extensions but prefer C++17.
+ # Kokkos requires at least C++17 (currently)
