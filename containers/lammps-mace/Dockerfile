@@ -19,20 +19,6 @@ RUN apt-get update && \
     libgsl-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Reinstall OpenMPI
-ARG OMPI_PATH=/opt/hpcx/ompi
-ARG OMPI_VER=4.1.7
-RUN rm -rf ${OMPI_PATH} && \
-    wget -q https://download.open-mpi.org/release/open-mpi/v${OMPI_VER%.*}/openmpi-${OMPI_VER}.tar.gz && \
-    tar xf openmpi-${OMPI_VER}.tar.gz && \
-    cd openmpi-${OMPI_VER} && \
-    ./configure --prefix=${OMPI_PATH} \
-    --with-libfabric=/opt/amazon/efa/ \
-    --with-cuda=/usr/local/cuda \
-    --with-cuda-libdir=/usr/local/cuda/lib64/stubs && \
-    make -j$(nproc) && make install && ldconfig && \
-    cd .. && rm -rf openmpi-${OMPI_VER}.tar.gz openmpi-${OMPI_VER}
-
 # Clone and build LAMMPS
 ARG LAMMPS_REPO=https://github.com/empa-scientific-it/lammps.git
 ARG LAMMPS_BRANCH=mace-features
@@ -113,13 +99,12 @@ RUN apt-get update && \
 RUN pip install --upgrade pip && \
     pip install mace-torch
 
-# Copy OpenMPI and LAMMPS from builder
-COPY --from=builder /opt/hpcx/ompi /opt/hpcx/ompi
+# Copy LAMMPS from builder
 COPY --from=builder /opt/lammps /opt/lammps
 
 # Set runtime environment
 ENV PATH="/opt/hpcx/ompi/bin:/opt/lammps/bin:${PATH}"
-ENV LD_LIBRARY_PATH="/opt/lammps/lib:/opt/hpcx/ompi/lib:/usr/local/cuda-12.8/compat/lib.real:${LD_LIBRARY_PATH}"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/lammps/lib:/opt/hpcx/ompi/lib:/usr/local/cuda-12.8/compat/lib.real"
 
 # Default to interactive shell
 CMD ["bash"]
