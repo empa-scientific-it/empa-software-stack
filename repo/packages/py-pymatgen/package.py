@@ -17,6 +17,7 @@ class PyPymatgen(PythonPackage):
     license("MIT")
 
     version("2025.3.10", sha256="95af3e192616091dead6364f1196a519b3e3747085d95a8554391851fee16cad")
+    version("2024.8.9", sha256="e0ca35d41d5964d063519cd6b8db54c411ec8469382df172fa177ec2a6b3a70a")
     version("2022.9.8", sha256="2250e05b81af3313bc0fc70cb558c2f528ed4eefb32d943ed9bd7a9756f03652")
     version("2021.3.9", sha256="a6f22d69133a48b7801bfd5e6a2878b47b4b4b2ef1a377b87c6c573be14cbf16")
     version("2020.12.31", sha256="5002490facd47c55d2dae42c35712e061c1f5d881180485c0543a899589856d6")
@@ -35,6 +36,7 @@ class PyPymatgen(PythonPackage):
     depends_on("py-requests", type=("build", "run"))
     depends_on("py-ruamel-yaml@0.17:", when="@2022.4.26:", type=("build", "run"))
     depends_on("py-ruamel-yaml@0.15.6:", when="@2021.1.1:", type=("build", "run"))
+    depends_on("py-monty@2025.3.3:", when="@2024.8.9:", type=("build", "run"))
     depends_on("py-monty@3.0.2:", when="@2021.1.1:", type=("build", "run"))
     depends_on("py-monty@0.9.6:", type=("build", "run"))
     depends_on("py-scipy@1.5.0:", when="@2021.1.1:", type=("build", "run"))
