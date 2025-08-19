@@ -1,0 +1,6 @@
+name: gpaw
+spack:
+    commit: releases/v0.23
+    repo: https://github.com/spack/spack.git
+store: /user-environment
+description: Library and scripts to perform scanning probe microscopy simulations based on a CP2K calculation
