@@ -41,7 +41,8 @@ RUN pip install --upgrade pip wheel setuptools && \
     --index-url https://download.pytorch.org/whl/cpu \
     torch==${PYTORCH_VERSION} \
     torchvision \
-    torchaudio
+    torchaudio \
+    mkl-include
 
 # Clone your LAMMPS fork/branch
 USER root
@@ -81,6 +82,8 @@ RUN mkdir -p build && cd build && \
     -D PKG_EXTRA-FIX=ON \
     # Point CMake at Torch's CMake package files using PyTorch's official utility
     -D CMAKE_PREFIX_PATH="$(python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)')" \
+    # Set MKL include directory from pip-installed mkl-include package
+    -D MKL_INCLUDE_DIR="/opt/venv/lib/python3.10/site-packages/mkl/include" \
     && cmake --build . -j"$(nproc)" && cmake --install .
 
 # ============================
