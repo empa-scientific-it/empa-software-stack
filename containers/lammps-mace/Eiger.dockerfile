@@ -57,7 +57,9 @@ WORKDIR /opt/lammps
 # RUN patch -p0 < diag_suppress.patch
 
 # Build lib-pace library with the same ABI as libtorch
-RUN make -C src lib-pace args="-b CXXFLAGS='-D_GLIBCXX_USE_CXX11_ABI=0' CPPFLAGS='-D_GLIBCXX_USE_CXX11_ABI=0'"
+RUN CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=${ABI} ${CXXFLAGS}" \
+    CPPFLAGS="-D_GLIBCXX_USE_CXX11_ABI=${ABI} ${CPPFLAGS}" \
+    make -C src lib-pace args="-b"
 
 # Configure & build (CPU: MPI+OpenMP; shared libs; same packages as the GPU image except Kokkos)
 RUN mkdir -p build && cd build && \
