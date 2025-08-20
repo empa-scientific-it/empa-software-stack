@@ -1,10 +1,11 @@
 # ============================
 # Stage 1: build toolchain
 # ============================
+ARG UBUNTU=22.04
 FROM ubuntu:${UBUNTU} AS builder
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Build args for build stage
+#Build args for this stage
 ARG PYTORCH_VERSION=2.5.1
 ARG MACE_VERSION=0.3.14
 ARG LAMMPS_REPO=https://github.com/empa-scientific-it/lammps.git
