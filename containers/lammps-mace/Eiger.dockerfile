@@ -109,6 +109,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libblas3 liblapack3 \
     libfftw3-3 \
     libgfortran5 \
+    intel-mkl \
     && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user for runtime
@@ -125,6 +126,15 @@ RUN pip install --no-cache-dir mace-torch==${MACE_VERSION}
 COPY --from=builder --chown=lammps:lammps /opt/lammps /opt/lammps
 ENV PATH="/opt/lammps/bin:${PATH}"
 ENV LD_LIBRARY_PATH="/opt/lammps/lib:${LD_LIBRARY_PATH}"
+
+# Register TORCH_LIB and MKL_LIB with the dynamic linker
+# This avoids the need of manually setting them in LD_LIBRARY_PATH
+ENV TORCH_LIB="/opt/venv/lib/python3.10/site-packages/torch/lib"
+ENV MKL_LIB="/usr/lib/x86_64-linux-gnu"
+RUN printf "%s\n" "$TORCH_LIB" "$MKL_LIB" > /etc/ld.so.conf.d/torch-mkl.conf && ldconfig
+
+# Alternatively, at the "builder" stage, tell CMake to use RPATH:
+# -DCMAKE_INSTALL_RPATH="$TORCH_LIB;$MKL_LIB" -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON
 
 # Switch to non-root user
 USER lammps
