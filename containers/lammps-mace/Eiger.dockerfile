@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libblas-dev liblapack-dev \
     libfftw3-dev \
     pkg-config \
+    gfortran \
     && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user for building
@@ -97,6 +98,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgsl27 libgslcblas0 \
     libblas3 liblapack3 \
     libfftw3-3 \
+    libgfortran5 \
     && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user for runtime
