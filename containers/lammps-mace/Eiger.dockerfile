@@ -1,4 +1,6 @@
 ARG UBUNTU=22.04
+ARG PYTORCH_VERSION=2.5.1
+ARG MACE_VERSION=0.3.14
 ARG LAMMPS_REPO=https://github.com/empa-scientific-it/lammps.git
 ARG LAMMPS_BRANCH=mace-features
 
@@ -28,11 +30,13 @@ ENV PATH="$VENV/bin:$PATH"
 
 USER lammps
 
-# PyTorch CPU only (needed for LAMMPS compilation)
+# PyTorch CPU only (needed for LAMMPS compilation) - pinned version
 RUN pip install --upgrade pip wheel setuptools && \
     pip install --no-cache-dir \
     --index-url https://download.pytorch.org/whl/cpu \
-    torch torchvision torchaudio
+    torch==${PYTORCH_VERSION} \
+    torchvision \
+    torchaudio
 
 # Clone your LAMMPS fork/branch
 USER root
@@ -93,8 +97,8 @@ RUN groupadd -r lammps && useradd -r -g lammps -d /home/lammps -m lammps
 COPY --from=builder --chown=lammps:lammps /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:${PATH}"
 
-# Install mace-torch in runtime stage
-RUN pip install --no-cache-dir mace-torch
+# Install mace-torch in runtime stage - pinned version
+RUN pip install --no-cache-dir mace-torch==${MACE_VERSION}
 
 # Bring LAMMPS install (bin + libs)
 COPY --from=builder --chown=lammps:lammps /opt/lammps /opt/lammps
