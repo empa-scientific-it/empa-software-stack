@@ -1,14 +1,14 @@
-ARG UBUNTU=22.04
-ARG PYTORCH_VERSION=2.5.1
-ARG MACE_VERSION=0.3.14
-ARG LAMMPS_REPO=https://github.com/empa-scientific-it/lammps.git
-ARG LAMMPS_BRANCH=mace-features
-
 # ============================
 # Stage 1: build toolchain
 # ============================
 FROM ubuntu:${UBUNTU} AS builder
 ENV DEBIAN_FRONTEND=noninteractive
+
+# Build args for build stage
+ARG PYTORCH_VERSION=2.5.1
+ARG MACE_VERSION=0.3.14
+ARG LAMMPS_REPO=https://github.com/empa-scientific-it/lammps.git
+ARG LAMMPS_BRANCH=mace-features
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential cmake git ca-certificates \
@@ -83,6 +83,9 @@ RUN mkdir -p build && cd build && \
 # ============================
 FROM ubuntu:${UBUNTU} AS runtime
 ENV DEBIAN_FRONTEND=noninteractive
+
+# Build args for runtime stage
+ARG MACE_VERSION=0.3.14
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 python3-pip python3-venv \
