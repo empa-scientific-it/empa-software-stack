@@ -19,6 +19,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     automake autoconf \
     wget \
     libgsl-dev \
+    libblas-dev liblapack-dev \
+    libfftw3-dev \
+    pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user for building
@@ -90,8 +93,10 @@ ARG MACE_VERSION=0.3.14
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 python3-pip python3-venv \
-    openmpi-bin libopenmpi-dev \
+    openmpi-bin libopenmpi3 \
     libgsl27 libgslcblas0 \
+    libblas3 liblapack3 \
+    libfftw3-3 \
     && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user for runtime
