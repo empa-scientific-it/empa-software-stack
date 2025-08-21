@@ -1,0 +1,8 @@
+name: wannier90
+spack:
+  commit: releases/v0.23
+  repo: https://github.com/spack/spack.git
+store: /user-environtment
+description: Wannier90 calculates maximally-localised Wannier functions (MLWFs).
+
+
