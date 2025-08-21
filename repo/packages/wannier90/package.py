@@ -12,8 +12,6 @@ class Wannier90(MakefilePackage):
 
     maintainers("AndresOrtegaGuerrero")
 
-    # See https://spdx.org/licenses/ for a list. Upon manually verifying
-    # the license, set checked_by to your Github username.
     license("GPL-3.0-or-later", checked_by="AndresOrtegaGuerrero")
 
     # Dependencies 
