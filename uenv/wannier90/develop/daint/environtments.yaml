@@ -8,9 +8,9 @@ gcc-env:
   specs:
   - cmake
   - openblas threads=openmp
-  - wannier90+mpi 
+  - wannier90@develop+mpi 
   variants:
   - +mpi
   views:
     default:
-      link: roots
+      link: all
