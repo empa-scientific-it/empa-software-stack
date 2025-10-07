@@ -13,7 +13,7 @@ gcc-env:
     - py-scikit-image
     - py-numpy
     - py-ase
-    - py-cubehandler@0.1.0
+    - py-cubehandler@0.2.0
   views:
     default:
       link: all
