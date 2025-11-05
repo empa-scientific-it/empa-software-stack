@@ -1,24 +1,24 @@
 gcc-env:
-    compiler:
-        - toolchain: gcc
-          spec: gcc@13
-    mpi:
-        spec: cray-mpich@8.1.30
-        gpu: null
-    unify: true
-    specs:
-        - python@3.10
-        - py-flit-core
-        - py-click
-        - py-scikit-image
-        - py-numpy
-        - py-ase
-        - py-cubehandler
-    views:
-        default:
-            link: all
-            uenv:
-                add_compilers: true
-                prefix_paths:
-                    LD_LIBRARY_PATH: [lib, lib64]
-                    PATH: [bin]
+  compiler:
+    - toolchain: gcc
+      spec: gcc@13
+  mpi:
+    spec: cray-mpich@8.1.30
+    gpu: null
+  unify: true
+  specs:
+    - python@3.10
+    - py-flit-core
+    - py-click
+    - py-scikit-image
+    - py-numpy
+    - py-ase
+    - py-cubehandler@0.1.0
+  views:
+    default:
+      link: all
+      uenv:
+        add_compilers: true
+        prefix_paths:
+          LD_LIBRARY_PATH: [lib, lib64]
+          PATH: [bin]

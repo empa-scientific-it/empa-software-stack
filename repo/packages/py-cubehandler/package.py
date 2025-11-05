@@ -38,6 +38,7 @@ class PyCubehandler(PythonPackage):
     license("MIT", checked_by="yakutovicha")
 
     version("0.1.0", sha256="94922ae7a33d4c7a2f444e196b4c3c85f8a3e83e6eaddfb96b812e05779362d9")
+    version("0.2.0", sha256="db6e9e40f3d661118aed9b4cacfbb1f0fad5b69b6c0c627ab0b74661fe9c85f5")
 
     # Only add the python/pip/wheel dependencies if you need specific versions
     # or need to change the dependency type. Generic python/pip/wheel dependencies are
