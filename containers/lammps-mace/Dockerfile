@@ -103,8 +103,9 @@ RUN pip install --upgrade pip && \
 COPY --from=builder /opt/lammps /opt/lammps
 
 # Set runtime environment
-ENV PATH="/opt/hpcx/ompi/bin:/opt/lammps/bin:${PATH}"
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/lammps/lib:/opt/hpcx/ompi/lib:/usr/local/cuda-12.8/compat/lib.real"
+ENV PLUMED_PREFIX="/opt/lammps/build/plumed_build-prefix"
+ENV PATH="/opt/hpcx/ompi/bin:/opt/lammps/bin:${PLUMED_PREFIX}/bin:${PATH}"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/lammps/lib:${PLUMED_PREFIX}/lib:/opt/hpcx/ompi/lib:/usr/local/cuda-12.8/compat/lib.real"
 
 # Default to interactive shell
 CMD ["bash"]
