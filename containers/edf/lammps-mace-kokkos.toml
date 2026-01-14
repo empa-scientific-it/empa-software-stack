@@ -1,0 +1,13 @@
+image = "/capstor/scratch/cscs/ebaldi/container-engine/lammps-pt25.01-gh100-mace-kokkos.sqsh"
+mounts = ["/capstor", "/users"]
+workdir = "/capstor/scratch/cscs/ebaldi"
+writable = true
+
+[annotations]
+com.hooks.aws_ofi_nccl.enabled = "true"
+com.hooks.aws_ofi_nccl.variant = "cuda12"
+
+[env]
+FI_CXI_DISABLE_HOST_REGISTER = "1"
+FI_MR_CACHE_MONITOR = "userfaultfd"
+NCCL_DEBUG = "INFO"
