@@ -1,0 +1,14 @@
+gcc-env:
+  compiler:
+    - toolchain: gcc
+      spec: gcc
+  mpi:
+    spec: cray-mpich@8.1.29
+  unify: true
+  specs:
+    - cmake
+    - openblas threads=openmp
+    - wannier90@develop+mpi
+  views:
+    default:
+      link: all
